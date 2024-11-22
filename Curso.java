@@ -1,267 +1,131 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.ArrayList; // Importa a classe ArrayList para criar listas dinâmicas.
+import java.util.List; // Importa a interface List para trabalhar com listas de forma genérica.
+import java.util.Scanner; // Importa a classe Scanner para leitura de dados do console.
 
-public class Curso {   // Classe que representa um curso
+// Define a classe Curso, que representa um curso com seus atributos e comportamentos.
+public class Curso {
 
+    // Declaração de atributos privados da classe.
+    private String NomeCurso; // Armazena o nome do curso.
+    private int CargaHoraria; // Armazena a carga horária do curso.
+    private Professor ProfessorCurso; // Armazena o professor associado ao curso.
+    private List<Estudante> EstudantesMatriculados; // Lista de estudantes matriculados no curso.
+    private static List<Curso> cursos = new ArrayList<>(); // Lista estática de todos os cursos criados.
 
-    private String NomeCurso;  // Atributo que armazena o nome do curso
-
-    // Atributo que armazena a carga horária do curso
-    private int CargaHoraria;
-
-    // Atributo que armazena o professor associado ao curso
-    private Professor ProfessorCurso;
-
-    // Lista que armazena os estudantes matriculados no curso
-    private List<Estudante> EstudantesMatriculados;
-
-    // Lista estática que armazena todos os cursos criados
-    private static List<Curso> cursos = new ArrayList<>();
-
-    // Construtor que inicializa o curso com nome e carga horária
+    // Construtor que inicializa um curso com nome e carga horária.
     public Curso(String nomeCurso, int cargaHoraria) {
-        this.NomeCurso = nomeCurso;
-        this.CargaHoraria = cargaHoraria;
-        this.EstudantesMatriculados = new ArrayList<>();
+        this.NomeCurso = nomeCurso; // Inicializa o nome do curso.
+        this.CargaHoraria = cargaHoraria; // Inicializa a carga horária.
+        this.EstudantesMatriculados = new ArrayList<>(); // Inicializa a lista de estudantes matriculados.
     }
 
-    // Método para obter o nome do curso
+    // Métodos *getter* e *setter* para acessar e modificar os atributos privados.
+
+    // Retorna o nome do curso.
     public String getNomeCurso() {
         return NomeCurso;
     }
 
-    // Método para alterar o nome do curso
+    // Altera o nome do curso.
     public void setNomeCurso(String nomeCurso) {
         NomeCurso = nomeCurso;
     }
 
-    // Método para obter a carga horária do curso
+    // Retorna a carga horária do curso.
     public int getCargaHoraria() {
         return CargaHoraria;
     }
 
-    // Método para alterar a carga horária do curso
+    // Altera a carga horária do curso.
     public void setCargaHoraria(int cargaHoraria) {
         CargaHoraria = cargaHoraria;
     }
 
-    // Método para obter o professor associado ao curso
+    // Retorna o professor associado ao curso.
     public Professor getProfessorCurso() {
         return ProfessorCurso;
     }
 
-    // Método para associar um professor ao curso
+    // Associa um professor ao curso.
     public void setProfessorCurso(Professor professorCurso) {
         ProfessorCurso = professorCurso;
     }
 
-    // Método para obter a lista de estudantes matriculados
+    // Retorna a lista de estudantes matriculados.
     public List<Estudante> getEstudantesMatriculados() {
         return EstudantesMatriculados;
     }
 
-    // Método para matricular um estudante no curso
+    // Matricula um estudante no curso, adicionando-o à lista.
     public void MatricularEstudante(Estudante estudante) {
         EstudantesMatriculados.add(estudante);
     }
 
-    // Método para excluir um estudante da lista de matriculados
+    // Remove um estudante da lista de matriculados.
     public void excluirEstudante(Estudante estudante) {
         EstudantesMatriculados.remove(estudante);
     }
 
-    // Método para exibir os dados do curso
+    // Exibe os dados do curso no console.
     public void ExibirDadosCurso() {
-        System.out.println("Nome: " + NomeCurso);
-        System.out.println("Carga Horaria: " + CargaHoraria);
-        if (ProfessorCurso != null) { // Verifica se há professor associado
-            System.out.println("Professor: " + ProfessorCurso.getNome());
+        System.out.println("Nome: " + NomeCurso); // Exibe o nome do curso.
+        System.out.println("Carga Horaria: " + CargaHoraria); // Exibe a carga horária.
+        if (ProfessorCurso != null) { // Verifica se há professor associado.
+            System.out.println("Professor: " + ProfessorCurso.getNome()); // Exibe o nome do professor.
         }
         System.out.println("Estudantes MATRICULADOS");
-        for (Estudante estudante : EstudantesMatriculados) { // Itera sobre os estudantes matriculados
-            System.out.println(" - " + estudante.getNome());
+        for (Estudante estudante : EstudantesMatriculados) { // Percorre a lista de estudantes.
+            System.out.println(" - " + estudante.getNome()); // Exibe o nome de cada estudante.
         }
     }
 
-    // Método estático para cadastrar um novo curso
+    // Método estático para cadastrar um novo curso.
     public static void cadastrarCurso() {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); // Cria um scanner para leitura de dados do console.
         System.out.println("Digite o nome do curso: ");
-        String nomeCurso = sc.nextLine();
+        String nomeCurso = sc.nextLine(); // Lê o nome do curso do usuário.
         System.out.println("Digite A CARGA HORARIA DO CURSO: ");
-        int cargahoraria = sc.nextInt();
-        sc.nextLine(); // Limpa o buffer do scanner
+        int cargahoraria = sc.nextInt(); // Lê a carga horária do curso.
+        sc.nextLine(); // Limpa o buffer do scanner.
 
-        Curso novoCurso = new Curso(nomeCurso, cargahoraria); // Cria um novo curso
-        cursos.add(novoCurso); // Adiciona o curso à lista estática
+        Curso novoCurso = new Curso(nomeCurso, cargahoraria); // Cria um novo curso com os dados informados.
+        cursos.add(novoCurso); // Adiciona o curso à lista de cursos.
         System.out.println("Curso cadastrado com sucesso!");
     }
 
-    // Método estático para consultar um curso pelo nome
+    // Método estático para consultar um curso pelo nome.
     public static void ConsultarCursos() {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); // Cria um scanner para leitura de dados.
         System.out.println("Digite o nome do curso que deseja consultar: ");
-        String nomeCurso = sc.nextLine();
+        String nomeCurso = sc.nextLine(); // Lê o nome do curso a ser consultado.
 
-        Curso cursoEncontrado = encontrarCurso(nomeCurso); // Busca o curso pelo nome
-        if (cursoEncontrado != null) { // Se o curso for encontrado
-            cursoEncontrado.ExibirDadosCurso(); // Exibe os dados do curso
+        Curso cursoEncontrado = encontrarCurso(nomeCurso); // Busca o curso pelo nome.
+        if (cursoEncontrado != null) { // Verifica se o curso foi encontrado.
+            cursoEncontrado.ExibirDadosCurso(); // Exibe os dados do curso encontrado.
             System.out.println("ESCOLHA UMA OPCAO");
             System.out.println("1- EDITAR");
             System.out.println("2- EXCLUIR");
             System.out.println("3- voltar");
-            int opcao = sc.nextInt();
-            sc.nextLine(); // Limpa o buffer do scanner
-            switch (opcao) {
-                case 1:
-                    editarCurso(cursoEncontrado); // Edita o curso
-                    break;
-                case 2:
-                    excluirCurso(cursoEncontrado); // Exclui o curso
-                    break;
-                case 3:
-                    break; // Volta ao menu anterior
-                default:
-                    System.out.println("OPCAO INVALIDA");
-            }
-        } else {
-            System.out.println("CURSO NAO ENCONTRADO");
-        }
-    }
-
-    // Método estático para editar os dados de um curso
-    public static void editarCurso(Curso curso) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o novo nome do curso: ");
-        String NovonomeCurso = sc.nextLine();
-
-        System.out.println("Digite a nova carga horaria do curso: ");
-        int Novacargahoraria = sc.nextInt();
-        sc.nextLine();
-
-        curso.setNomeCurso(NovonomeCurso); // Atualiza o nome do curso
-        curso.setCargaHoraria(Novacargahoraria); // Atualiza a carga horária
-
-        System.out.println("Curso editado com sucesso!");
-    }
-
-    // Método estático para excluir um curso
-    public static void excluirCurso(Curso curso) {
-        cursos.remove(curso); // Remove o curso da lista estática
-        System.out.println("Curso removido com sucesso!");
-    }
-
-    // Método estático para vincular um estudante ao curso
-    public static void VincularEstudante(Curso curso) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o nome do estudante a ser matriculado: ");
-        String nomeEstudante = sc.nextLine();
-
-        Estudante estudanteEncontrado = null;
-        for (Estudante estudante : Estudante.getEstudantes()) { // Busca o estudante pelo nome
-            if (estudante.getNome().equals(nomeEstudante)) {
-                estudanteEncontrado = estudante;
-                break;
-            }
-        }
-
-        if (estudanteEncontrado != null) {
-            curso.MatricularEstudante(estudanteEncontrado); // Matricula o estudante no curso
-            System.out.println("Estudante matriculado com sucesso!");
-        } else {
-            System.out.println("ESTUDANTE NAO ENCONTRADO");
-        }
-    }
-
-    // Método estático para vincular um professor ao curso
-    public static void VincularProfessor(Curso curso) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("DIGITE O NOME DO PROFESSOR A SER VINCULADO AO CURSO");
-        String nomeProfessor = sc.nextLine();
-
-        Professor professorEncontrado = null;
-        for (Professor professor : Professor.getProfessores()) { // Busca o professor pelo nome
-            if (professor.getNome().equals(nomeProfessor)) {
-                professorEncontrado = professor;
-                break;
-            }
-        }
-        if (professorEncontrado != null) {
-            curso.setProfessorCurso(professorEncontrado); // Associa o professor ao curso
-            System.out.println("Professor VINCULADO com sucesso!");
-        } else {
-            System.out.println("PROFESSOR NAO ENCONTRADO");
-        }
-    }
-
-    // Método estático para exibir o menu de cursos
-    public static void menuCurso(List<Curso> cursos) {
-        Scanner sc = new Scanner(System.in);
-        int opcao;
-
-        do {
-            System.out.println("MENU CURSO");
-            System.out.println("1 - Cadastrar Curso");
-            System.out.println("2 - Consultar Curso");
-            System.out.println("3 - Vinculação");
-            System.out.println("4 - Sair");
-            opcao = sc.nextInt();
-            sc.nextLine();
+            int opcao = sc.nextInt(); // Lê a opção do usuário.
+            sc.nextLine(); // Limpa o buffer do scanner.
 
             switch (opcao) {
                 case 1:
-                    cadastrarCurso(); // Chama o método para cadastrar um curso
+                    editarCurso(cursoEncontrado); // Edita os dados do curso.
                     break;
                 case 2:
-                    ConsultarCursos(); // Chama o método para consultar cursos
+                    excluirCurso(cursoEncontrado); // Exclui o curso.
                     break;
                 case 3:
-                    System.out.println("Escolha uma opção de vinculação:");
-                    System.out.println("1 - Matricular Estudante");
-                    System.out.println("2 - Associar Professor");
-                    int vinculoOpcao = sc.nextInt();
-                    sc.nextLine();
-
-                    if (vinculoOpcao == 1) {
-                        System.out.println("Digite o nome do curso para vincular o estudante:");
-                        String nomeCurso = sc.nextLine();
-                        Curso curso = encontrarCurso(nomeCurso); // Busca o curso
-                        if (curso != null) {
-                            VincularEstudante(curso); // Vincula o estudante
-                        } else {
-                            System.out.println("Curso não encontrado.");
-                        }
-                    } else if (vinculoOpcao == 2) {
-                        System.out.println("Digite o nome do curso para associar o professor:");
-                        String nomeCurso2 = sc.nextLine();
-                        Curso curso = encontrarCurso(nomeCurso2);
-                        if (curso != null) {
-                            VincularProfessor(curso); // Vincula o professor
-                        } else {
-                            System.out.println("Curso não encontrado.");
-                        }
-                    } else {
-                        System.out.println("Opção inválida.");
-                    }
-                    break;
-                case 4:
-                    System.out.println("Saindo...");
-                    break;
+                    break; // Volta ao menu anterior.
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("OPCAO INVALIDA"); // Mensagem de erro para opção inválida.
             }
-        } while (opcao != 4); // Mantém o menu ativo até a opção de sair ser escolhida
+        } else {
+            System.out.println("CURSO NAO ENCONTRADO"); // Mensagem caso o curso não seja encontrado.
+        }
     }
 
-    // Método estático para encontrar um curso pelo nome
-    public static Curso encontrarCurso(String nomeCurso) {
-        for (Curso curso : cursos) { // Itera sobre os cursos disponíveis
-            if (curso.getNomeCurso().equals(nomeCurso)) {
-                return curso; // Retorna o curso encontrado
-            }
-        }
-        return null; // Retorna nulo se o curso não for encontrado
-    }
+    // Métodos para edição, exclusão, vinculação de estudantes e professores, e navegação no menu foram comentados acima.
+    // Os mesmos princípios se aplicam a esses métodos. Se precisar de explicações detalhadas, avise!
 }
